@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b3a5b"><title>مناسيب الفلل</title>
-<script>const VER=1;(function(){try{var s=JSON.parse(localStorage.getItem('upd')||'null');if(s&&s.v>VER){document.open();document.write(s.h);document.close();}}catch(e){}})();</script>
+<script>const VER=2;(function(){try{var s=JSON.parse(localStorage.getItem('upd')||'null');if(s&&s.v>VER){document.open();document.write(s.h);document.close();}}catch(e){}})();</script>
 <style>
 :root{--bg:#f3f6f9;--card:#fff;--tx:#12202b;--mut:#64798a;--pri:#0b3a5b;--acc:#f59e0b;--bd:#dbe4ea}
 @media(prefers-color-scheme:dark){:root{--bg:#0e1a24;--card:#16293a;--tx:#e8f0f6;--mut:#8fa6b8;--acc:#fbbf24;--bd:#27415a}}
@@ -45,8 +45,8 @@ function show(id){
   const bad=Math.abs(d[10]-0.5)>0.001;
   const T=[["عمق الميدة","Ground Beam Depth",d[9]],["سمك الخرسانة المسلحة"+(bad?" ⚠️":""),"R.C. Thickness",d[10]],["سمك الخرسانة العادية","P.C. Thickness",d[11]],["سمك الاستبدال","Replacement Thickness",d[12]]];
   const r=(a,k)=>`<div class="row ${k?"k":""}"><div><span>${a[0]}</span><small>${a[1]}</small></div><em>${f(a[2])}</em></div>`;
-  $("out").innerHTML=`<div class="hd"><div><b>فيلا ${id}</b><span class="tag">${d[0]}</span></div><span style="direction:ltr;color:var(--mut);font-size:13px">BH: ${d[1]||"—"}</span></div>
-  <h3>المناسيب</h3>${L.map(x=>r(x,x[3])).join("")}<h3>السُمك والأعماق</h3>${T.map(x=>r(x,0)).join("")}
+  $("out").innerHTML=`<div class="hd"><div><b>فيلا ${id}</b><span class="tag">النوع ${d[0]}</span></div><span style="direction:ltr;color:var(--mut);font-size:13px">BH: ${d[1]||"—"}</span></div>
+  <div class="row k"><div><span>نوع الفيلا</span><small>Villa Type</small></div><em>${d[0]}</em></div><h3>المناسيب</h3>${L.map(x=>r(x,x[3])).join("")}<h3>السُمك والأعماق</h3>${T.map(x=>r(x,0)).join("")}
   ${(d[15]||bad)?'<p class="note warn">⚠️ منسوب الحفر ناقص في الـ PDF فاتحسب (التأسيس − الاستبدال). وسمك الخرسانة المسلحة في بعض الصفوف شكله غلط في الجدول الأصلي (ترقيم تلقائي) — راجعه.</p>':""}
   <button id="cp">📋 نسخ المناسيب</button>`;
   $("cp").onclick=()=>{const t=`فيلا ${id} (${d[0]})\n`+L.map(x=>`${x[0]}: ${f(x[2])}`).join("\n");navigator.clipboard&&navigator.clipboard.writeText(t).then(()=>toast("اتنسخ ✅"))}
